@@ -133,9 +133,27 @@ robustez_3
 #Las 3 redes tienen una conectividad promedio de 3.6, 4.07 y 4.13
 #Todas son muy poco densas, teniendo una densidad menor a 0.02, la menos densa es la red 2
 #Los componentes de las redes incrementan conforme se van quitando nodos de la red
+
 #La robustez obtenida a partir de la distancia promedio parece ser paradojica:
 #cuando quitamos los nodos, la distancia promedio disminuye. Sin embargo, quitar los nodos
 #con mas conectividad debería de incrementar la distancia. Esto es debido a que en este caso,
-#cuando quitamos los nodos más conectados, aparecen más distancias infinitas, que son ignoradas
-#para 
+#cuando quitamos los nodos más conectados, aparecen más distancias infinitas en lugar de distancias largas (porque ahora
+#las comunidades que estaban lejanas entre ellas y solo estaban conectadas por los hubs, ya dejan
+#de estar conectadas y reemplazan sus valores por infinitos) que son ignoradas
+#para calcular la distancia promedio. Es por ello que disminuye.
+#Entonces lo podemos interpretar como que la red 2 tubo el cambio más dramático en cuestión de que tuvo
+#un mayor numero de distancias (o distancias más grandes) reemplazadas por valores infinitos, por lo que es la 
+#menos robusta.
 
+#########Funcion de las proteinas mas importantes ##########
+#Red 3 Gemella sanguinis
+#HMPREF0433_01178 Adenilato cinasa
+#HMPREF0433_00316 glucose-6-phosphate isomerase 
+#HMPREF0433_00802 fructose-1,6-bisphosphate aldolase, class II
+#HMPREF0433_00234 hypothetical protein HMPREF0433_00234
+#HMPREF0433_00235 ribonucleoside-diphosphate reductase, alpha subunit
+#HMPREF0433_00782 cytidylate kinase
+#HMPREF0433_00807 uridylate kinase
+#HMPREF0433_01354 purine nucleoside phosphorylase
+#HMPREF0433_00297 glyceraldehyde-3-phosphate dehydrogenase, type I
+#HMPREF0433_01682 2,3-bisphosphoglycerate-dependent phosphoglycerate mutase
