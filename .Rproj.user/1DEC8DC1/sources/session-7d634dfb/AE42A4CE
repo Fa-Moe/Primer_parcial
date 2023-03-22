@@ -3,7 +3,7 @@
     "path": "D:/Documentos/Escuela/VI_Genomica_Roberto/Primer_parcial/Moedano_Parcial.R",
     "project_path": "Moedano_Parcial.R",
     "type": "r_source",
-    "hash": "3666153939",
+    "hash": "3907100885",
     "contents": "",
     "dirty": false,
     "created": 1678858444433.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "104,16",
-        "scrollLine": "83"
+        "cursorPosition": "139,6",
+        "scrollLine": "117"
     },
     "folds": "",
-    "lastKnownWriteTime": 1679504453,
+    "lastKnownWriteTime": 1679505468,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1679504453985,
+    "last_content_update": 1679505468476,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -28,18 +28,19 @@ red_1
 red_2
 red_3
 
+#Al correr la func_muy_descriptora a veces puede haber errores debido a los plots que genera,
+#ampliar los margenes en caso de error
 
-
-descrita_red_1 <- func_muy_descriptora(grafo_demo=red_1, modo_para_degree=1)
+descrita_red_1 <- func_muy_descriptora(grafo_demo=red_1, modo_para_degree=1) 
 descrita_red_2 <- func_muy_descriptora(grafo_demo=red_2, modo_para_degree=1)
 descrita_red_3 <- func_muy_descriptora(grafo_demo=red_3, modo_para_degree=1)
 
-#Promedio conectividades
+########## Promedio conectividades ##########
 descrita_red_1[[7]]
 descrita_red_2[[7]]
 descrita_red_3[[7]]
 
-#Densidad
+########## Densidad ##########
 descrita_red_1[[13]]
 descrita_red_2[[13]]
 descrita_red_3[[13]]
@@ -65,7 +66,7 @@ componentes_data_1 <- n_destruc(base=red_1,var=10,names=nombres_1)
 componentes_data_2 <- n_destruc(base=red_2,var=10,names=nombres_2)
 componentes_data_3 <- n_destruc(base=red_3,var=10,names=nombres_3)
 
-###Numero de componentes al ir quitando los nodos mas importantes de la red.
+########## Numero de componentes al ir quitando los nodos mas importantes de la red. ##########
 #Te los da en formato de lista, con un NULL inicial, seguido de el numero de componentes al quitar 1, luego 2, etc.
 
 componentes_data_1
@@ -77,6 +78,13 @@ componentes_data_3
 red_1_quitando_nodos <- func_destructora_samp(red_1,cuantos_desapar = 0,los_num_vertex = NULL,los_name_vertex=nombres_1[1:10])[[7]]
 red_2_quitando_nodos <- func_destructora_samp(red_2,cuantos_desapar = 0,los_num_vertex = NULL,los_name_vertex=nombres_2[1:10])[[7]]
 red_3_quitando_nodos <- func_destructora_samp(red_3,cuantos_desapar = 0,los_num_vertex = NULL,los_name_vertex=nombres_3[1:10])[[7]]
+
+#Al correr la func_destructora_samp a veces puede haber errores debido a los plots que genera,
+#ampliar los margenes en caso de error
+
+
+
+
 
 
 #Revisamos que los nodos mas populares ya no esten en nuestras nuevas redes. revisamos el 1er nodo mas popular
@@ -102,7 +110,32 @@ length(V(red_3_quitando_nodos))
 
 #Hacemos una funcion comparativa
 
-compara_las_dis 
-mean(distances(red_1)[which(distances(red_1)<1000)])
-mean(distances(red_1_quitando_nodos)[which(distances(red_1_quitando_nodos)<1000)])
+compara_las_dis <- function(red_normal,red_nodos_quitados){
+dato_distancias_red <- mean(distances(red_normal)[which(distances(red_normal)<1000000)])
+dato_distancias_quitados <- mean(distances(red_nodos_quitados)[which(distances(red_nodos_quitados)<1000000)])
+dato_dist_comparativo <- c(dato_distancias_red,dato_distancias_quitados,dato_distancias_red-dato_distancias_quitados)
+return(dato_dist_comparativo)
+}
+#usamos el truco de distancia menor a un millon para quitar las distancias infinitas
+
+robustez_1 <- compara_las_dis(red_normal=red_1,red_nodos_quitados = red_1_quitando_nodos)
+robustez_2 <- compara_las_dis(red_normal=red_2,red_nodos_quitados = red_2_quitando_nodos)
+robustez_3 <- compara_las_dis(red_normal=red_3,red_nodos_quitados = red_3_quitando_nodos)
+
+
+########## Comparacion de robustez ##########
+#Distancia media en la red original, en la red con menos nodos, y su diferencia
+robustez_1
+robustez_2
+robustez_3
+
+
+#Las 3 redes tienen una conectividad promedio de 3.6, 4.07 y 4.13
+#Todas son muy poco densas, teniendo una densidad menor a 0.02, la menos densa es la red 2
+#Los componentes de las redes incrementan conforme se van quitando nodos de la red
+#La robustez obtenida a partir de la distancia promedio parece ser paradojica:
+#cuando quitamos los nodos, la distancia promedio disminuye. Sin embargo, quitar los nodos
+#con mas conectividad debería de incrementar la distancia. Esto es debido a que en este caso,
+#cuando quitamos los nodos más conectados, aparecen más distancias infinitas, que son ignoradas
+#para 
 
