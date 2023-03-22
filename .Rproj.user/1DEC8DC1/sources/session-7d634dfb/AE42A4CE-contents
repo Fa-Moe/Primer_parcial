@@ -182,9 +182,9 @@ clustering_edges <- cluster_edge_betweenness(base_zach)
 clustering_spinglass <- cluster_spinglass(base_zach)
 
 
-plot(base_zach, vertex.color = clustering_optimal$membership)
-plot(base_zach, vertex.color = clustering_spinglass$membership)
-plot(base_zach, vertex.color = clustering_edges$membership)
+plot(base_zach, vertex.color = clustering_optimal$membership) #hacemos grafica con metodo optimal
+plot(base_zach, vertex.color = clustering_spinglass$membership) #metodo spinglass
+plot(base_zach, vertex.color = clustering_edges$membership) #metodo edge betweenness
 
 #Los metodos de clusterizacion de arriba tienen el problema de que
 #generan mas de 2 clusters. En caso de que un cluster este solo conectado
@@ -197,4 +197,5 @@ plot(base_zach, vertex.color = clustering_edges$membership)
 #Ya que 3 de sus cuatros clusters pertenecen de manera no ambigua
 #A Mr Hi o John A.
 #Y el cluster de 24,25,26,28,19 y 32 se puede deducir que pertenece
-#a John A, ya que las conexiones de ese cluster son mayores al
+#a John A, ya que las conexiones de ese cluster son mayores al cluster
+#de John A que a las conexiones del grupo de Mr Hi.
