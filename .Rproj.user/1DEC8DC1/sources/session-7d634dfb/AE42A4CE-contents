@@ -157,3 +157,44 @@ robustez_3
 #HMPREF0433_01354 purine nucleoside phosphorylase
 #HMPREF0433_00297 glyceraldehyde-3-phosphate dehydrogenase, type I
 #HMPREF0433_01682 2,3-bisphosphoglycerate-dependent phosphoglycerate mutase
+
+library(igraphdata)
+base_zach <- karate
+
+#nombres nodos mas importantes
+names(sort(degree(base_zach,mode="all"),decreasing=T)[1:2])
+base_zach
+V(base_zach)$name == "Mr Hi"
+V(base_zach)$name == "John A"
+#Lideres primero y ultimo
+
+length(V(base_zach))
+V(base_zach)[c(1,34)]$color <- "white"
+plot(base_zach)
+#Coloreamos a los lideres de blanco.
+
+help(cluster_optimal)
+
+clustering_optimal <- cluster_optimal(base_zach)
+
+clustering_edges <- cluster_edge_betweenness(base_zach)
+
+clustering_spinglass <- cluster_spinglass(base_zach)
+
+
+plot(base_zach, vertex.color = clustering_optimal$membership)
+plot(base_zach, vertex.color = clustering_spinglass$membership)
+plot(base_zach, vertex.color = clustering_edges$membership)
+
+#Los metodos de clusterizacion de arriba tienen el problema de que
+#generan mas de 2 clusters. En caso de que un cluster este solo conectado
+#solo con el cluster de Mr Hi o de John A, es fácil poder incorporarlos al cluster grande
+#pero si están conectados a ambos clusters (como el cluster de 3, 10 , 14 y 29 en)
+#el metodo de clustering edges) podemos decir que el metodo de
+#clusterizacion no fue tan efectivo para separar a los 2 grupos.
+
+#De los metodos probados, "clustering optimal" fue el mejor,
+#Ya que 3 de sus cuatros clusters pertenecen de manera no ambigua
+#A Mr Hi o John A.
+#Y el cluster de 24,25,26,28,19 y 32 se puede deducir que pertenece
+#a John A, ya que las conexiones de ese cluster son mayores al
